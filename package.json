@@ -13,6 +13,7 @@
   "author": "Cyber Info Scripter",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "redux": "^4.0.0"
   }
 }

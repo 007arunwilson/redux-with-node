@@ -1,5 +1,6 @@
 const actionImports = require("./actions.js");
 const _ = require("lodash");
+const combineReducers = require("redux").combineReducers;
 
 const visibilityFilters = actionImports.visibilityFilters;
 const SET_VISIBILITY_FILTER = actionImports.SET_VISIBILITY_FILTER;
@@ -12,6 +13,8 @@ const initialState = {
 };
 
 function todos(state, action) {
+  let state = _.cloneDeep(state);
+
   switch (action.type) {
     case ADD_TODO:
       state.push({ text: action.text, completed: false });
@@ -33,6 +36,8 @@ function todos(state, action) {
 }
 
 function visibilityFilter(state, action) {
+  let state = _.cloneDeep(state);
+
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
       state.visibilityFilter = action.filter;
@@ -42,37 +47,10 @@ function visibilityFilter(state, action) {
   }
 }
 
-function todoApp(state, action) {
-  if (typeof state == "undefined") {
-    var state = initialState;
-  }
+const todoApp = combineReducers({
+  visibilityFilter,
+  todos
+});
 
-  const clonedState = _.cloneDeep(state);
 
-  switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      clonedState.visibilityFilter = visibilityFilter(
-        clonedState.visibilityFilter,
-        action
-      );
-      return clonedState;
-
-      break;
-
-    case ADD_TODO:
-      clonedState.todos = todos(clonedState.todos, action);
-
-      return clonedState;
-      break;
-
-    case TOGGLE_TODO:
-      clonedState.todos = todos(clonedState.todos, action);
-
-      return clonedState;
-      break;
-    default:
-      return state;
-  }
-
-  return state;
-}
+module.exports.todoApp = todoApp;

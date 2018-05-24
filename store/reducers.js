@@ -49,3 +49,8 @@ function todoApp(state, action) {
 
   return state;
 }
+
+const todoApp = combineReducers({
+    visibilityFilter,
+    todos
+})

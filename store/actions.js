@@ -12,13 +12,13 @@ module.exports.SET_VISIBILITY_FILTER = SET_VISIBILITY_FILTER;
 /*
 * Other Constants
 */
-const VisibilityFilters = {
+const visibilityFilters = {
   SHOW_ALL: "SHOW_ALL",
   SHOW_COMPLETED: "SHOW_COMPLETED",
   SHOW_ACTIVE: "SHOW_ACTIVE"
 };
 
-module.exports.VisibilityFilters = VisibilityFilters;
+module.exports.visibilityFilters = visibilityFilters;
 
 /*
 * action creators

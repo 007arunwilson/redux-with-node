@@ -13,11 +13,13 @@ function todoApp(state, action) {
 
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
+        
+        const clonedState = _.cloneDeep(state);
 
-        return Object.assign({},state, {
-            visibilityFilter:action.filter
-        })
+        clonedState.visibilityFilter = action.filter;
 
+        return clonedState;
+        
         break;
 
     default:

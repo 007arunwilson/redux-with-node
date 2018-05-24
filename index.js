@@ -1,15 +1,27 @@
-const actionImports = require("./actions.js");
+const actionImports = require("./store/actions.js");
 
 const visibilityFilters = actionImports.visibilityFilters;
-const SET_VISIBILITY_FILTER = actionImports.SET_VISIBILITY_FILTER;
-const TOGGLE_TODO = actionImports.TOGGLE_TODO;
-const ADD_TODO = actionImports.ADD_TODO;
+const toggleTodo = actionImports.toggleTodo;
+const setVisibilityFilter = actionImports.setVisibilityFilter;
+const addTodo = actionImports.addTodo;
 
 
 const createStore = require('redux').createStore;
 const todoApp = require('./store/reducers.js').todoApp;
 
 const store = createStore(todoApp);
+const unsubscribe = store.subscribe(function(){
+  console.log(store.getState())
+});
 
 /* testing App */
 console.log('Initial State : ',store.getState());
+
+store.dispatch(addTodo('Need to check Documentation tools used by react'));
+store.dispatch(addTodo('Need to complete Blockchain course with python'));
+store.dispatch(addTodo('Need to Initate by writing "90 days and a react native App"'));
+toggleTodo(1);
+toggleTodo(2);
+store.dispatch(setVisibilityFilter(visibilityFilters.SHOW_COMPLETED));
+
+unsubscribe();

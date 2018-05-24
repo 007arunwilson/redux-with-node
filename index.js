@@ -20,8 +20,7 @@ console.log('Initial State : ',store.getState());
 store.dispatch(addTodo('Need to check Documentation tools used by react'));
 store.dispatch(addTodo('Need to complete Blockchain course with python'));
 store.dispatch(addTodo('Need to Initate by writing "90 days and a react native App"'));
-toggleTodo(1);
-toggleTodo(2);
+store.dispatch(toggleTodo(0));
 store.dispatch(setVisibilityFilter(visibilityFilters.SHOW_COMPLETED));
 
 unsubscribe();

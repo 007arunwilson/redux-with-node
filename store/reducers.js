@@ -17,7 +17,7 @@ function todos(state, action) {
       state.push({ text: action.text, completed: false });
       return state;
     case TOGGLE_TODO:
-      state = state.map((todo, index) => {
+      state = state.map(function(todo, index){
         if (index == action.index) {
           todo.completed = !todo.completed;
           return todo;
@@ -38,10 +38,10 @@ function visibilityFilter(state, action) {
   if (typeof state == "undefined") state = visibilityFilters.SHOW_ALL;
 
   state = _.cloneDeep(state);
-
+  
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
-      state.visibilityFilter = action.filter;
+      state = action.filter;
       return state;
     default:
       return state;

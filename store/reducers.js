@@ -7,13 +7,10 @@ const SET_VISIBILITY_FILTER = actionImports.SET_VISIBILITY_FILTER;
 const TOGGLE_TODO = actionImports.TOGGLE_TODO;
 const ADD_TODO = actionImports.ADD_TODO;
 
-const initialState = {
-  visibilityFilter: visibilityFilters.SHOW_ALL,
-  todos: []
-};
-
 function todos(state, action) {
-  let state = _.cloneDeep(state);
+  if (typeof state == "undefined") state = [];
+
+  state = _.cloneDeep(state);
 
   switch (action.type) {
     case ADD_TODO:
@@ -33,10 +30,14 @@ function todos(state, action) {
       return state;
       break;
   }
+
+  return state;
 }
 
 function visibilityFilter(state, action) {
-  let state = _.cloneDeep(state);
+  if (typeof state == "undefined") state = visibilityFilters.SHOW_ALL;
+
+  state = _.cloneDeep(state);
 
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
@@ -45,12 +46,13 @@ function visibilityFilter(state, action) {
     default:
       return state;
   }
+
+  return state;
 }
 
 const todoApp = combineReducers({
-  visibilityFilter,
-  todos
+  visibilityFilter: visibilityFilter,
+  todos: todos
 });
-
 
 module.exports.todoApp = todoApp;

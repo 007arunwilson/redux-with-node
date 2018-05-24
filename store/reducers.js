@@ -1,6 +1,5 @@
-import { SET_VISIBILITY_FILTER } from "./actions.js";
-
 const visibilityFilters = require("./actions.js").VisibilityFilters;
+const _ = require("lodash");
 
 const initialState = {
   visibilityFilter: visibilityFilters.SHOW_ALL,

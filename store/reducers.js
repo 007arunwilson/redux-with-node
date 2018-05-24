@@ -1,4 +1,9 @@
-const visibilityFilters = require("./actions.js").VisibilityFilters;
+const {
+  visibilityFilters,
+  SET_VISIBILITY_FILTER,
+  TOGGLE_TODO,
+  ADD_TODO
+} = require("./actions.js");
 const _ = require("lodash");
 
 const initialState = {
@@ -8,23 +13,28 @@ const initialState = {
 
 function todoApp(state, action) {
   if (typeof state == "undefined") {
-    return initialState;
+    var state = initialState;
   }
 
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
-        
-        const clonedState = _.cloneDeep(state);
+      const clonedState = _.cloneDeep(state);
 
-        clonedState.visibilityFilter = action.filter;
+      clonedState.visibilityFilter = action.filter;
 
-        return clonedState;
-        
-        break;
+      return clonedState;
+
+      break;
+
+    case ADD_TODO:
+      const clonedState = _.cloneDeep(state);
+
+      clonedState.todos.push({ text: action.text, completed: false });
+
+      break;
 
     default:
-        return state;
-
+      return state;
   }
 
   return state;

@@ -16,10 +16,10 @@ function todoApp(state, action) {
     var state = initialState;
   }
 
+  const clonedState = _.cloneDeep(state);
+
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
-      const clonedState = _.cloneDeep(state);
-
       clonedState.visibilityFilter = action.filter;
 
       return clonedState;
@@ -27,12 +27,22 @@ function todoApp(state, action) {
       break;
 
     case ADD_TODO:
-      const clonedState = _.cloneDeep(state);
-
       clonedState.todos.push({ text: action.text, completed: false });
 
+      return clonedState;
       break;
 
+    case TOGGLE_TODO:
+      clonedState.todos = clonedState.todos.map((todo, index) => {
+        if (index == action.index) {
+          todo.completed = !todo.completed;
+          return todo;
+        }
+
+        return todo;
+      });
+
+      break;
     default:
       return state;
   }
